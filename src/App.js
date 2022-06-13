@@ -1,10 +1,12 @@
-import Data from './Components/Data.jsx';
+import Data from './Components/Data';
 import React from 'react';
 import './App.css';
 
 function App() {
-  return
-  (<Data></Data>)
+  return<>
+    <Data />
+  </>
+  
 }
 
 export default App;

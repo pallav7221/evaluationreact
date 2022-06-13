@@ -32,10 +32,7 @@ function Data() {
             setLoading(true);
             let res = await fetch(`http://localhost:4000/products?_page=${page}&_limit=5`)
             let data = await res.json();
-
-
             setAllProduct(data);
-
 
             let last = res.headers.get("X-Total-Count");
             setLastPage(Math.ceil(last / 5));
@@ -46,12 +43,24 @@ function Data() {
         }
         setLoading(false);
     }
+    async function deleteItem(id) {
+        try {
+            await fetch(`http://localhost:4000/products/?${id}`, {
+                method: "DELETE"
+            });
+            getProduct(`http://localhost:4000/products?_page=${page}&_limit=5`);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const handleSort = () => {
+        getProduct(`http://localhost:4000/products?_page=${page}&_limit=5&_sort=price`)
+    }
     const handlePage = (value) => {
         setPage(page + value);
     }
 
     React.useEffect(() => {
-
         getProduct();
     }, [page]);
     return (
@@ -63,7 +72,10 @@ function Data() {
                         allProduct={allProduct}
                         handlePage={handlePage}
                         page={page}
-                        lastPage={lastPage} />
+                        lastPage={lastPage}
+                        handleSort={handleSort}
+                       
+                        deleteItem={deleteItem} />
             }
         </>
     );
