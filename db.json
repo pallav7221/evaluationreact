@@ -1,14 +1,6 @@
 {
   "products": [
     {
-      "id": 1,
-      "title": "Bloodworth",
-      "gender": "female",
-      "price": 3978,
-      "category": "saree",
-      "image": "https://picsum.photos/200"
-    },
-    {
       "id": 2,
       "title": "Tomik",
       "gender": "female",
@@ -89,6 +81,5 @@
       "price": "500",
       "id": 11
     }
-   
   ]
 }

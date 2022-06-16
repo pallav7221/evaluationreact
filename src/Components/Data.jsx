@@ -45,7 +45,7 @@ function Data() {
     }
     async function deleteItem(id) {
         try {
-            await fetch(`http://localhost:4000/products/?${id}`, {
+            await fetch(`http://localhost:4000/products/${id}`, {
                 method: "DELETE"
             });
             getProduct(`http://localhost:4000/products?_page=${page}&_limit=5`);
@@ -54,7 +54,7 @@ function Data() {
         }
     }
     const handleSort = () => {
-        getProduct(`http://localhost:4000/products?_page=${page}&_limit=5&_sort=price`)
+        getProduct(`http://localhost:4000/products?_sort=price&_page=${page}&_limit=5`)
     }
     const handlePage = (value) => {
         setPage(page + value);
@@ -66,15 +66,16 @@ function Data() {
     return (
         <>
             <ProductForm addToDB={addToDB} />
-            {loading ? (<h1>Loading Data...</h1>) :
-                error ? (<h1>Error Occur...</h1>) :
+            {loading ?
+             (<h1>Loading Data...</h1>) :
+                error ?
+                 (<h1>Error Occur...</h1>) :
                     <ProductListing
                         allProduct={allProduct}
                         handlePage={handlePage}
                         page={page}
                         lastPage={lastPage}
                         handleSort={handleSort}
-                       
                         deleteItem={deleteItem} />
             }
         </>
